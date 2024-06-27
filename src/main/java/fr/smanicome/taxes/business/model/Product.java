@@ -24,14 +24,23 @@ public class Product {
     }
 
     public double getTax() {
+        double tax;
+
         if(imported) {
-            return price * (category.getTax() + 5) /100 ;
+            tax = price * (category.getTax() + 5) /100 ;
+        } else {
+            tax = price * category.getTax() / 100;
         }
-        return price * category.getTax() / 100;
+
+        return ceilTax(tax);
     }
 
     public double getPriceIncludingTax() {
         return price + getTax();
+    }
+
+    private double ceilTax(double tax) {
+        return Math.ceil(tax * 20) / 20;
     }
 
     @Override
