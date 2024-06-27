@@ -19,10 +19,6 @@ public class Product {
         return name;
     }
 
-    public double getPriceExcludingTax() {
-        return price;
-    }
-
     public double getTax() {
         double tax;
 
