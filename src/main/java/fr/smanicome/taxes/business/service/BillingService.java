@@ -15,6 +15,19 @@ public class BillingService {
 
     public void printBill(Map<Product, Integer> cart) {
         Objects.requireNonNull(cart);
+        if(cart.keySet().stream().anyMatch(Objects::isNull)) {
+            throw new IllegalArgumentException("At least one product is null");
+        }
+
+        if(cart.values().stream().anyMatch(Objects::isNull)) {
+            throw new IllegalArgumentException("At least one quantity is null");
+        }
+
+        if(cart.values().stream().anyMatch(quantity -> quantity < 0)) {
+            throw new IllegalArgumentException("At least one quantity is negative");
+        }
+
+
         billPrinter.printBill(cart);
     }
 }
